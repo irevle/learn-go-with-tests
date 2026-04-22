@@ -9,10 +9,40 @@ package main
 import "testing"
 
 func TestHello(t *testing.T) {
-	got := Hello("Elv")
-	want := "Hello, Elv"
+	// t.Run for having subtests in a test
+	t.Run("saying hello to people", func(t *testing.T) {
+		got := Hello("Elv", "")
+		want := "Hello, Elv"
 
-	// %q for passing variable inside formatted Error
+		// %q for passing variable inside formatted Error
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("say 'Hello, world' when empty string is supplied", func(t *testing.T) {
+		got := Hello("", "")
+		want := "Hello, world"
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in Spanish", func(t *testing.T) {
+		got := Hello("Elodie", "Spanish")
+		want := "Hola, Elodie"
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in French", func(t *testing.T) {
+		got := Hello("Elodie", "French")
+		want := "Bonjour, Elodie"
+		assertCorrectMessage(t, got, want)
+	})
+}
+
+// t = test
+// b = benchmark
+// t.Helper() tells the test suite that this method is a helper
+// got string, want string can be shortened to got, want string (because both has same type)
+func assertCorrectMessage(t testing.TB, got, want string) {
+	t.Helper()
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
 	}
