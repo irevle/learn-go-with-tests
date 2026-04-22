@@ -9,8 +9,8 @@ package main
 import "testing"
 
 func TestHello(t *testing.T) {
-	got := Hello()
-	want := "Hello, world"
+	got := Hello("Elv")
+	want := "Hello, Elv"
 
 	// %q for passing variable inside formatted Error
 	if got != want {
