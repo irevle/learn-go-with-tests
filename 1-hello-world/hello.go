@@ -2,13 +2,15 @@ package main
 
 import "fmt"
 
-const spanish = "Spanish"
-const spanishHelloPrefix = "Hola, "
+const (
+	spanish            = "Spanish"
+	spanishHelloPrefix = "Hola, "
 
-const french = "French"
-const frenchHelloPrefix = "Bonjour, "
+	french            = "French"
+	frenchHelloPrefix = "Bonjour, "
 
-const englishHelloPrefix = "Hello, "
+	englishHelloPrefix = "Hello, "
+)
 
 // string keyword indicates the func returns string
 func Hello(name string, language string) string {
@@ -16,16 +18,23 @@ func Hello(name string, language string) string {
 		name = "world"
 	}
 
-	prefix := englishHelloPrefix
+	return greetingPrefix(language) + name
+}
 
+// prefix variable type string gets returned
+// switch variable
+// case value inside variable
+// default when none of the case matches
+func greetingPrefix(language string) (prefix string) {
 	switch language {
 	case spanish:
 		prefix = spanishHelloPrefix
 	case french:
 		prefix = frenchHelloPrefix
+	default:
+		prefix = englishHelloPrefix
 	}
-
-	return prefix + name
+	return
 }
 
 func main() {
